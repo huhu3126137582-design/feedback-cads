@@ -22,7 +22,7 @@ replicates.
 | Vanilla SD v1.5 | 0.200100 | **0.785446** | **0.260481** | **7.1916** | 50 |
 | Original CADS | **0.235120** | 0.778002 | 0.246984 | 7.2249 | 50 |
 | A*: fixed clean-unconditional CADS | 0.203794 | 0.782338 | 0.258324 | 7.2304 | 50 |
-| **Feedback-CADS (B*)** | 0.204895† | 0.781730 | 0.257690 | 7.2686 | 50 |
+| Feedback-CADS (B*) | 0.204895† | 0.781730 | 0.257690 | 7.2686 | 50 |
 
 Values are prompt-group means; each group contains eight candidate images.
 DINO diversity is the mean pairwise cosine distance between DINOv2 image
@@ -53,9 +53,9 @@ model weights are intentionally not stored in Git.
 
 For prompt group `p` and sampling step `i`, Feedback-CADS uses
 
-$$
+```math
 \begin{aligned}
-q_{p,i} &= q^{\mathrm{cap}}_i\,\rho_{p,i}, \\
+q_{p,i} &= q^{\mathrm{cap}}_i \rho_{p,i}, \\
 g^{\mathrm{target}}_i &= (1+\alpha)g^{\mathrm{ref}}_i, \\
 z^{\mathrm{target}}_i &= (1+\alpha)z^{\mathrm{ref}}_i, \\
 e^g_{p,i} &=
@@ -65,34 +65,34 @@ e^z_{p,i} &=
 \frac{z^{\mathrm{target}}_i-z_{p,i}}
      {z^{\mathrm{target}}_i+\varepsilon}.
 \end{aligned}
-$$
+```
 
 The controller combines the two normalized deficits as
 
-$$
+```math
 e^D_{p,i} =
 \begin{cases}
 e^g_{p,i}, & \text{before latent control is eligible}, \\
-\max\!\left(e^g_{p,i},e^z_{p,i}\right),
+\max\left(e^g_{p,i},e^z_{p,i}\right),
 & \text{afterwards},
 \end{cases}
-$$
+```
 
 and applies the observation with a one-step delay:
 
-$$
+```math
 \rho_{p,i+1} =
-\operatorname{clip}\!\left(
-\rho_{p,i}+k_D e^D_{p,i},\,0,\,1
+\operatorname{clip}\left(
+\rho_{p,i}+k_D e^D_{p,i}, 0, 1
 \right).
-$$
+```
 
-Here $q^{\mathrm{cap}}_i$ is the fixed condition-pollution schedule,
-$g_{p,i}$ is guidance diversity, and $z_{p,i}$ is predicted-clean-latent
-diversity. The frozen B* settings are $\rho_{p,0}=0.55$, $\alpha=0.15$,
-$k_D=0.08$, and $\varepsilon=10^{-6}$. Latent control becomes eligible at
-normalized loop progress $0.20$. Condition noise is active only for DDIM steps
-0–29 and is exactly zero for steps 30–49. The implementation is in
+Here $`q^{\mathrm{cap}}_i`$ is the fixed condition-pollution schedule,
+$`g_{p,i}`$ is guidance diversity, and $`z_{p,i}`$ is predicted-clean-latent
+diversity. The frozen B* settings are $`\rho_{p,0}=0.55`$, $`\alpha=0.15`$,
+$`k_D=0.08`$, and $`\varepsilon=10^{-6}`$. Latent control becomes eligible at
+normalized loop progress $`0.20`$. Condition noise is active only for DDIM
+steps 0–29 and is exactly zero for steps 30–49. The implementation is in
 [`controller.py`](src/feedback_cads/controller.py) and
 [`pipeline.py`](src/feedback_cads/pipeline.py).
 
