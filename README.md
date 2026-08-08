@@ -53,23 +53,46 @@ model weights are intentionally not stored in Git.
 
 For prompt group `p` and sampling step `i`, Feedback-CADS uses
 
-```text
-q[p,i]       = q_cap[i] * rho[p,i]
-g_target[i]  = (1 + alpha) * g_ref[i]
-z_target[i]  = (1 + alpha) * z_ref[i]
-e_g[p,i]     = (g_target[i] - g[p,i]) / (g_target[i] + epsilon)
-e_z[p,i]     = (z_target[i] - z[p,i]) / (z_target[i] + epsilon)
-e_D[p,i]     = e_g[p,i] before latent control is eligible,
-               max(e_g[p,i], e_z[p,i]) afterwards
-rho[p,i+1]   = clip(rho[p,i] + k_D * e_D[p,i], 0, 1)
-```
+$$
+\begin{aligned}
+q_{p,i} &= q^{\mathrm{cap}}_i\,\rho_{p,i}, \\
+g^{\mathrm{target}}_i &= (1+\alpha)g^{\mathrm{ref}}_i, \\
+z^{\mathrm{target}}_i &= (1+\alpha)z^{\mathrm{ref}}_i, \\
+e^g_{p,i} &=
+\frac{g^{\mathrm{target}}_i-g_{p,i}}
+     {g^{\mathrm{target}}_i+\varepsilon}, \\
+e^z_{p,i} &=
+\frac{z^{\mathrm{target}}_i-z_{p,i}}
+     {z^{\mathrm{target}}_i+\varepsilon}.
+\end{aligned}
+$$
 
-Here `q_cap` is the fixed condition-pollution schedule, `g` is guidance
-diversity, and `z` is predicted-clean-latent diversity. The frozen B* settings
-are `rho[p,0] = 0.55`, `alpha = 0.15`, `k_D = 0.08`, and
-`epsilon = 1e-6`. Latent control becomes eligible at normalized loop progress
-`0.20`. The update has a one-step delay; condition noise is active only for
-DDIM steps 0–29 and is exactly zero for steps 30–49. The implementation is in
+The controller combines the two normalized deficits as
+
+$$
+e^D_{p,i} =
+\begin{cases}
+e^g_{p,i}, & \text{before latent control is eligible}, \\
+\max\!\left(e^g_{p,i},e^z_{p,i}\right),
+& \text{afterwards},
+\end{cases}
+$$
+
+and applies the observation with a one-step delay:
+
+$$
+\rho_{p,i+1} =
+\operatorname{clip}\!\left(
+\rho_{p,i}+k_D e^D_{p,i},\,0,\,1
+\right).
+$$
+
+Here $q^{\mathrm{cap}}_i$ is the fixed condition-pollution schedule,
+$g_{p,i}$ is guidance diversity, and $z_{p,i}$ is predicted-clean-latent
+diversity. The frozen B* settings are $\rho_{p,0}=0.55$, $\alpha=0.15$,
+$k_D=0.08$, and $\varepsilon=10^{-6}$. Latent control becomes eligible at
+normalized loop progress $0.20$. Condition noise is active only for DDIM steps
+0–29 and is exactly zero for steps 30–49. The implementation is in
 [`controller.py`](src/feedback_cads/controller.py) and
 [`pipeline.py`](src/feedback_cads/pipeline.py).
 
@@ -296,8 +319,6 @@ corresponding paper or archival technical report is released.
 
 ## License
 
-No project-level software license is currently included, so the repository
-contents should not be assumed to grant reuse or redistribution rights. Add an
-explicit `LICENSE` before inviting downstream software reuse. Model checkpoints
-and data remain governed by their upstream terms; see
-[`THIRD_PARTY.md`](THIRD_PARTY.md).
+The project code and documentation are released under the
+[MIT License](LICENSE). Model checkpoints and data remain governed by their
+upstream terms; see [`THIRD_PARTY.md`](THIRD_PARTY.md).
