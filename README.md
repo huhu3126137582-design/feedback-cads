@@ -82,7 +82,7 @@ and applies the observation with a one-step delay:
 
 ```math
 \rho_{p,i+1} =
-\operatorname{clip}\left(
+\mathrm{clip}\left(
 \rho_{p,i}+k_D e^D_{p,i}, 0, 1
 \right).
 ```
