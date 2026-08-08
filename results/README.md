@@ -34,12 +34,27 @@ Fig. 2 is an image plate derived from the full formal image archive. Its PDF
 and PNG are included, but the 32 source PNGs and large embedded-image SVG are
 not included in the Git package.
 
-## Failure-case scope
+## Replotting and slides
 
-Low-score samples were automatically selected for optional manual review, but
-no human-confirmed failure labels are asserted. Failure-case annotations are
-not part of parameter selection, formal acceptance, or the reported method
-claim.
+The repository contains presentation-ready PDF and PNG exports for all four
+project figures. Fig. 1 also has an SVG suitable for vector editing. For new
+quantitative visualizations, use:
+
+- `publication/main_table.csv` for the four-method result table;
+- `publication/primary_b_vs_a_ci_source_data.csv` for the primary confidence-
+  interval plot;
+- `publication/project_figures/fig3_controller_dynamics_source_data.csv` for
+  controller trajectories and reference curves;
+- `publication/project_figures/fig4_ablation_source_data.csv` for the Stage-A
+  and Stage-B parameter-selection panels;
+- `formal_test500/metrics/per_prompt.jsonl` and `paired_bootstrap.json` for
+  custom prompt-level distributions and paired-comparison plots;
+- `development/` for A*/B* selections, reference signals and development-set
+  ablations.
+
+Fig. 2 can be placed directly into slides from the included PDF or PNG. To
+change its image selection or layout, first regenerate or restore the omitted
+formal PNG archive as described in the root `REPRODUCE.md`.
 
 Run `sha256sum -c results/CHECKSUMS.sha256` from the repository root to verify
 the package. Rebuild it from a full local `outputs/` archive with:
