@@ -1,0 +1,50 @@
+{"prompt_id":"single_000","category":"single_subject","prompt":"a red apple on a wooden table","checks":[{"question":"Is there an apple?","answer":"yes"},{"question":"Is there a banana?","answer":"no"}]}
+{"prompt_id":"single_001","category":"single_subject","prompt":"a golden retriever in a park","checks":[{"question":"Is there a dog?","answer":"yes"},{"question":"Is there a cat?","answer":"no"}]}
+{"prompt_id":"single_002","category":"single_subject","prompt":"a blue bicycle beside a wall","checks":[{"question":"Is there a bicycle?","answer":"yes"},{"question":"Is there a motorcycle?","answer":"no"}]}
+{"prompt_id":"single_003","category":"single_subject","prompt":"a white vase on a shelf","checks":[{"question":"Is there a vase?","answer":"yes"},{"question":"Is there a clock?","answer":"no"}]}
+{"prompt_id":"single_004","category":"single_subject","prompt":"a green frog on a leaf","checks":[{"question":"Is there a frog?","answer":"yes"},{"question":"Is there a bird?","answer":"no"}]}
+{"prompt_id":"single_005","category":"single_subject","prompt":"a yellow taxi on a street","checks":[{"question":"Is there a taxi?","answer":"yes"},{"question":"Is there a bus?","answer":"no"}]}
+{"prompt_id":"single_006","category":"single_subject","prompt":"a wooden chair in an empty room","checks":[{"question":"Is there a chair?","answer":"yes"},{"question":"Is there a bed?","answer":"no"}]}
+{"prompt_id":"single_007","category":"single_subject","prompt":"a small lighthouse by the sea","checks":[{"question":"Is there a lighthouse?","answer":"yes"},{"question":"Is there a bridge?","answer":"no"}]}
+{"prompt_id":"single_008","category":"single_subject","prompt":"an orange butterfly on a flower","checks":[{"question":"Is there a butterfly?","answer":"yes"},{"question":"Is there a fish?","answer":"no"}]}
+{"prompt_id":"single_009","category":"single_subject","prompt":"a brown horse in a field","checks":[{"question":"Is there a horse?","answer":"yes"},{"question":"Is there a cow?","answer":"no"}]}
+{"prompt_id":"multi_000","category":"multiple_subjects","prompt":"a cat and a dog on the grass","checks":[{"question":"Are there both a cat and a dog?","answer":"yes"},{"question":"Is there an elephant?","answer":"no"}]}
+{"prompt_id":"multi_001","category":"multiple_subjects","prompt":"two boats on a lake","checks":[{"question":"Are there boats?","answer":"yes"},{"question":"Is there an airplane?","answer":"no"}]}
+{"prompt_id":"multi_002","category":"multiple_subjects","prompt":"three balloons in the sky","checks":[{"question":"Are there balloons?","answer":"yes"},{"question":"Is there a train?","answer":"no"}]}
+{"prompt_id":"multi_003","category":"multiple_subjects","prompt":"a cup and a book on a desk","checks":[{"question":"Are there both a cup and a book?","answer":"yes"},{"question":"Is there a bicycle?","answer":"no"}]}
+{"prompt_id":"multi_004","category":"multiple_subjects","prompt":"a man and a woman at a bus stop","checks":[{"question":"Are there two people?","answer":"yes"},{"question":"Is there a horse?","answer":"no"}]}
+{"prompt_id":"multi_005","category":"multiple_subjects","prompt":"two birds on a branch","checks":[{"question":"Are there birds?","answer":"yes"},{"question":"Is there a dog?","answer":"no"}]}
+{"prompt_id":"multi_006","category":"multiple_subjects","prompt":"a fork and a spoon on a plate","checks":[{"question":"Are there both a fork and a spoon?","answer":"yes"},{"question":"Is there a shoe?","answer":"no"}]}
+{"prompt_id":"multi_007","category":"multiple_subjects","prompt":"two children flying a kite","checks":[{"question":"Are children flying a kite?","answer":"yes"},{"question":"Is there a car?","answer":"no"}]}
+{"prompt_id":"multi_008","category":"multiple_subjects","prompt":"a car and a bicycle on a road","checks":[{"question":"Are there both a car and a bicycle?","answer":"yes"},{"question":"Is there a boat?","answer":"no"}]}
+{"prompt_id":"multi_009","category":"multiple_subjects","prompt":"a rabbit and a turtle in a garden","checks":[{"question":"Are there both a rabbit and a turtle?","answer":"yes"},{"question":"Is there a truck?","answer":"no"}]}
+{"prompt_id":"action_000","category":"people_actions","prompt":"a person riding a bicycle","checks":[{"question":"Is a person riding a bicycle?","answer":"yes"},{"question":"Is the person swimming?","answer":"no"}]}
+{"prompt_id":"action_001","category":"people_actions","prompt":"a chef cooking in a kitchen","checks":[{"question":"Is a chef cooking?","answer":"yes"},{"question":"Is the chef skiing?","answer":"no"}]}
+{"prompt_id":"action_002","category":"people_actions","prompt":"a child running on a beach","checks":[{"question":"Is a child running?","answer":"yes"},{"question":"Is the child sleeping?","answer":"no"}]}
+{"prompt_id":"action_003","category":"people_actions","prompt":"a woman reading a book","checks":[{"question":"Is a woman reading?","answer":"yes"},{"question":"Is the woman driving?","answer":"no"}]}
+{"prompt_id":"action_004","category":"people_actions","prompt":"a man playing a guitar","checks":[{"question":"Is a man playing a guitar?","answer":"yes"},{"question":"Is the man cooking?","answer":"no"}]}
+{"prompt_id":"action_005","category":"people_actions","prompt":"a swimmer in a pool","checks":[{"question":"Is a person swimming?","answer":"yes"},{"question":"Is the person cycling?","answer":"no"}]}
+{"prompt_id":"action_006","category":"people_actions","prompt":"a farmer watering plants","checks":[{"question":"Is a farmer watering plants?","answer":"yes"},{"question":"Is the farmer playing tennis?","answer":"no"}]}
+{"prompt_id":"action_007","category":"people_actions","prompt":"a dancer on a stage","checks":[{"question":"Is there a dancer?","answer":"yes"},{"question":"Is there a pilot?","answer":"no"}]}
+{"prompt_id":"action_008","category":"people_actions","prompt":"a skier on a snowy hill","checks":[{"question":"Is a person skiing?","answer":"yes"},{"question":"Is the person reading?","answer":"no"}]}
+{"prompt_id":"action_009","category":"people_actions","prompt":"a painter painting a wall","checks":[{"question":"Is a person painting?","answer":"yes"},{"question":"Is the person fishing?","answer":"no"}]}
+{"prompt_id":"scene_000","category":"scenes","prompt":"a sunny beach with blue water","checks":[{"question":"Is this a beach?","answer":"yes"},{"question":"Is this a snowy mountain?","answer":"no"}]}
+{"prompt_id":"scene_001","category":"scenes","prompt":"snowy mountains under a clear sky","checks":[{"question":"Are there snowy mountains?","answer":"yes"},{"question":"Is this a city street?","answer":"no"}]}
+{"prompt_id":"scene_002","category":"scenes","prompt":"a city street at night","checks":[{"question":"Is this a city street?","answer":"yes"},{"question":"Is this a farm?","answer":"no"}]}
+{"prompt_id":"scene_003","category":"scenes","prompt":"a quiet path through a forest","checks":[{"question":"Is this a forest?","answer":"yes"},{"question":"Is this a kitchen?","answer":"no"}]}
+{"prompt_id":"scene_004","category":"scenes","prompt":"sand dunes in a desert","checks":[{"question":"Is this a desert?","answer":"yes"},{"question":"Is this a swimming pool?","answer":"no"}]}
+{"prompt_id":"scene_005","category":"scenes","prompt":"a small village in the rain","checks":[{"question":"Is this a village?","answer":"yes"},{"question":"Is this an airport?","answer":"no"}]}
+{"prompt_id":"scene_006","category":"scenes","prompt":"a calm lake at sunrise","checks":[{"question":"Is there a lake?","answer":"yes"},{"question":"Is there a highway?","answer":"no"}]}
+{"prompt_id":"scene_007","category":"scenes","prompt":"a colorful flower garden","checks":[{"question":"Is this a flower garden?","answer":"yes"},{"question":"Is this a train station?","answer":"no"}]}
+{"prompt_id":"scene_008","category":"scenes","prompt":"a waterfall in a green forest","checks":[{"question":"Is there a waterfall?","answer":"yes"},{"question":"Is there a skyscraper?","answer":"no"}]}
+{"prompt_id":"scene_009","category":"scenes","prompt":"a farm field at sunset","checks":[{"question":"Is this a farm field?","answer":"yes"},{"question":"Is this a hospital?","answer":"no"}]}
+{"prompt_id":"style_000","category":"art_and_style","prompt":"a watercolor painting of a small house","checks":[{"question":"Is there a house?","answer":"yes"},{"question":"Is there a spaceship?","answer":"no"}]}
+{"prompt_id":"style_001","category":"art_and_style","prompt":"an oil painting of flowers","checks":[{"question":"Are there flowers?","answer":"yes"},{"question":"Is there a motorcycle?","answer":"no"}]}
+{"prompt_id":"style_002","category":"art_and_style","prompt":"a pencil sketch of a cat","checks":[{"question":"Is there a cat?","answer":"yes"},{"question":"Is there a boat?","answer":"no"}]}
+{"prompt_id":"style_003","category":"art_and_style","prompt":"a cartoon robot","checks":[{"question":"Is there a robot?","answer":"yes"},{"question":"Is there a horse?","answer":"no"}]}
+{"prompt_id":"style_004","category":"art_and_style","prompt":"a paper cut forest","checks":[{"question":"Is this a forest?","answer":"yes"},{"question":"Is this a bathroom?","answer":"no"}]}
+{"prompt_id":"style_005","category":"art_and_style","prompt":"a clay model of a bird","checks":[{"question":"Is there a bird?","answer":"yes"},{"question":"Is there a bus?","answer":"no"}]}
+{"prompt_id":"style_006","category":"art_and_style","prompt":"pixel art of a castle","checks":[{"question":"Is there a castle?","answer":"yes"},{"question":"Is there a bicycle?","answer":"no"}]}
+{"prompt_id":"style_007","category":"art_and_style","prompt":"an ink drawing of a tree","checks":[{"question":"Is there a tree?","answer":"yes"},{"question":"Is there an airplane?","answer":"no"}]}
+{"prompt_id":"style_008","category":"art_and_style","prompt":"a stained glass picture of a fish","checks":[{"question":"Is there a fish?","answer":"yes"},{"question":"Is there a dog?","answer":"no"}]}
+{"prompt_id":"style_009","category":"art_and_style","prompt":"a children's book picture of the moon","checks":[{"question":"Is there a moon?","answer":"yes"},{"question":"Is there a train?","answer":"no"}]}

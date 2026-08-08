@@ -1,0 +1,75 @@
+{
+  "comparison": "B_feedback minus A_star",
+  "development_split": "COCO-Dev-50",
+  "statistical_unit": "prompt",
+  "prompt_count": 50,
+  "candidates_per_prompt": 8,
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20260808,
+  "comparisons": {
+    "dino_diversity": {
+      "mean_difference": 0.0014696624566554483,
+      "median_difference": 0.0005731690880158291,
+      "ci95_lower": -0.000428872637792733,
+      "ci95_upper": 0.0035667327272970143,
+      "paired_difference_sd": 0.007198133847720651,
+      "standardized_paired_effect": 0.20417270472413196
+    },
+    "clipscore": {
+      "mean_difference": -0.0008114373683929443,
+      "median_difference": -0.0003204345703125,
+      "ci95_lower": -0.0020748755931854247,
+      "ci95_upper": 0.000401112377643585,
+      "paired_difference_sd": 0.004537546568170321,
+      "standardized_paired_effect": -0.178827336800235
+    },
+    "hpsv2": {
+      "mean_difference": -0.0003375244140625,
+      "median_difference": -0.00054931640625,
+      "ci95_lower": -0.0008319244384765625,
+      "ci95_upper": 0.00015320587158203114,
+      "paired_difference_sd": 0.0018008132348100877,
+      "standardized_paired_effect": -0.1874288835388835
+    }
+  },
+  "quality_noninferiority": {
+    "clipscore_margin": 0.0076791833996772765,
+    "clipscore_passed": true,
+    "hpsv2_margin": 0.002563040161132812,
+    "hpsv2_passed": true,
+    "both_passed": true
+  },
+  "core_point_improvements": [
+    "dino_diversity"
+  ],
+  "core_strong_improvements": [],
+  "closed_loop_point_contribution_observed": true,
+  "closed_loop_strong_contribution_observed": false,
+  "controller_behavior": {
+    "mean_active_rho_across_prompts": 0.7252495628794032,
+    "sd_prompt_mean_active_rho": 0.09618722353233755,
+    "mean_active_boundary_rate": 0.08666666666666668,
+    "adaptive_prompt_trajectories_present": true,
+    "no_long_saturation_under_25pct_diagnostic": true
+  },
+  "alpha_margin_ablation_conditions": {
+    "all_core_intervals_include_zero": true,
+    "quality_noninferiority_passed": true,
+    "adaptive_prompt_trajectories_present": true,
+    "no_long_saturation_under_25pct_diagnostic": true,
+    "eligible_for_small_alpha_ablation": true
+  },
+  "frozen_a_metric_reproduction": {
+    "passed": true,
+    "maximum_absolute_error": {
+      "dino_diversity": 5.222865900877949e-08,
+      "clipscore": 5.960464477539063e-08,
+      "hpsv2": 0.0
+    }
+  },
+  "unet_calls_per_prompt": {
+    "A_star": 50,
+    "B_feedback": 50
+  },
+  "formal_test_data_used": false
+}

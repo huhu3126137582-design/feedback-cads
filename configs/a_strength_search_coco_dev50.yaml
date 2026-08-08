@@ -1,0 +1,195 @@
+format_version: 1
+description: Consolidated COCO-Dev-50 coarse-to-fine Stage-A search profiles.
+
+shared:
+  dataset: &dataset
+    path: data/coco/coco_dev50.jsonl
+    split_metadata: data/coco/coco_caption_splits.json
+    sha256: 940030cc9f07a787f2041ea8144f831ad65a33cd2a55ee116f74ca4710b35754
+    expected_prompts: 50
+    expected_categories: 1
+  model: &model
+    snapshot: models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    resolution: 512
+    dtype: float16
+  cads: &cads
+    noise_scale: 0.20
+    rescale: true
+    rescale_mix: 0.70
+    hold_until_progress: 0.10
+    hard_off_progress: 0.60
+    content_tokens_only: true
+    clean_unconditional: true
+  randomness: &randomness
+    latent_seed_base: 320000
+    latent_prompt_stride: 1000
+    condition_seed_base: 2920000
+    condition_prompt_stride: 100003
+    paired_latents_across_rho: true
+    shared_condition_bank_across_nonzero_rho: true
+  evaluation: &evaluation
+    dino_model: facebook/dinov2-base
+    clip_model: sentence-transformers/clip-ViT-B-32
+    clipscore_weight: 2.5
+    hps_version: v2.1
+    bootstrap_replicates: 10000
+    bootstrap_seed: 20260808
+
+profiles:
+  dev20:
+    legacy_source_name: a_strength_curve_dev20.yaml
+    legacy_sha256: 9314265482c5346f53f148003edbcce03162707b3eef2edb4415a04b1f61c50e
+    output_dir: outputs/a_strength_curve_dev20
+    config:
+      experiment:
+        name: a_strength_curve_dev20
+        stage: A
+        purpose: development_only
+        formal_test_data_used: false
+      dataset:
+        path: data/diversity_prompt_dev20.jsonl
+        expected_prompts: 20
+        expected_categories: 5
+      model: *model
+      sampling:
+        scheduler: DDIM
+        num_inference_steps: 50
+        eta: 0.0
+        cfg_scale: 7.5
+        candidates_per_prompt: 8
+        rho_grid: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+      cads: *cads
+      randomness:
+        latent_seed_base: 120000
+        latent_prompt_stride: 1000
+        condition_seed_base: 920000
+        condition_prompt_stride: 100003
+        paired_latents_across_rho: true
+        shared_condition_bank_across_nonzero_rho: true
+      evaluation:
+        dino_model: facebook/dinov2-base
+        clip_model: openai/clip-vit-base-patch32
+        clipscore_weight: 2.5
+        hps_version: v2.1
+        bootstrap_replicates: 10000
+        bootstrap_seed: 20260808
+
+  dev50_confirmation:
+    legacy_source_name: a_strength_curve_dev50_sd15.yaml
+    legacy_sha256: 5c296ec4d97bfc6292edecbb8ecca4aeb5dd307ce86d7b4225bf42ea5e911e13
+    output_dir: outputs/a_strength_curve_dev50_sd15
+    config:
+      experiment:
+        name: a_strength_curve_dev50_sd15
+        stage: A
+        purpose: a_star_confirmation_development
+        formal_test_data_used: false
+      dataset:
+        path: data/diversity_prompt_dev50_sd15.jsonl
+        expected_prompts: 50
+        expected_categories: 5
+      model: *model
+      sampling:
+        scheduler: DDIM
+        num_inference_steps: 50
+        eta: 0.0
+        cfg_scale: 7.5
+        candidates_per_prompt: 8
+        rho_grid: [0.0, 0.2, 0.4]
+        candidate_rationale: rho_ge_0.6_failed_quality_constraints_on_dev20
+      cads: *cads
+      randomness: *randomness
+      evaluation:
+        dino_model: facebook/dinov2-base
+        clip_model: openai/clip-vit-base-patch32
+        clipscore_weight: 2.5
+        hps_version: v2.1
+        bootstrap_replicates: 10000
+        bootstrap_seed: 20260808
+      semantic_proxy:
+        model: Salesforce/blip-vqa-base
+        revision: 787b3d35d57e49572baabd22884b3d5a05acf072
+        weights_format: safetensors
+        checks_per_prompt: 2
+        failure_definition: any_failed_check_per_image
+        noninferiority_margin: 0.01
+
+  coarse:
+    legacy_source_name: a_strength_curve_coco_dev50_coarse.yaml
+    legacy_sha256: caeefa2cef16bca321397871d8d8a47091891c6a0fcbae0bd682c64772934cd1
+    output_dir: outputs/a_strength_curve_coco_dev50_coarse
+    config:
+      experiment:
+        name: a_strength_curve_coco_dev50_coarse
+        stage: A
+        purpose: a_star_coarse_coco_dev50
+        formal_test_data_used: false
+      dataset: *dataset
+      model: *model
+      sampling:
+        scheduler: DDIM
+        num_inference_steps: 50
+        eta: 0.0
+        cfg_scale: 7.5
+        candidates_per_prompt: 8
+        rho_grid: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+      cads: *cads
+      randomness: *randomness
+      evaluation: *evaluation
+
+  fine:
+    legacy_source_name: a_strength_curve_coco_dev50_fine.yaml
+    legacy_sha256: 59b85ffeb5fd6831b2dc68efc09ab350d2b4a0121c875dc107d0528b6ae54106
+    output_dir: outputs/a_strength_curve_coco_dev50_fine
+    config:
+      experiment:
+        name: a_strength_curve_coco_dev50_fine
+        stage: A
+        purpose: a_star_fine_coco_dev50
+        formal_test_data_used: false
+      dataset: *dataset
+      model: *model
+      sampling:
+        scheduler: DDIM
+        num_inference_steps: 50
+        eta: 0.0
+        cfg_scale: 7.5
+        candidates_per_prompt: 8
+        rho_grid: [0.0, 0.25, 0.30, 0.35, 0.45, 0.50, 0.55]
+      a_star_search:
+        coarse_center: 0.40
+        fine_radius: 0.20
+        fine_step: 0.05
+        reused_coarse_rhos: [0.20, 0.40, 0.60]
+      cads: *cads
+      randomness: *randomness
+      evaluation: *evaluation
+
+  reference:
+    legacy_source_name: a_star_reference_coco_dev50.yaml
+    legacy_sha256: 1001f645b7c992d2c3f11e192950549e209ec83e128d5d50f20817e3a5c1b5b6
+    output_dir: outputs/a_star_reference_coco_dev50
+    config:
+      experiment:
+        name: a_star_reference_coco_dev50
+        stage: A
+        purpose: a_star_reference_coco_dev50
+        formal_test_data_used: false
+      dataset: *dataset
+      model: *model
+      sampling:
+        scheduler: DDIM
+        num_inference_steps: 50
+        eta: 0.0
+        cfg_scale: 7.5
+        candidates_per_prompt: 8
+        rho_grid: [0.55]
+      cads: *cads
+      randomness: *randomness
+      reference:
+        a_star_selection: outputs/a_star_coco_dev50/A_STAR_SELECTION.json
+        a_star_selection_sha256: e2a360b76ab53146b991c4d81531dd7f3a5803e2ebb2fe76b679361bd1e06a5a
+        regression_images: outputs/a_strength_curve_coco_dev50_fine/images/rho_0p55
+        pool_size: 8
+        dz_control_start_progress: 0.20
+        reference_margin_alpha: 0.0

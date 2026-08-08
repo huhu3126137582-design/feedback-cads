@@ -1,0 +1,36 @@
+method:
+  name: clean-unconditional-cads-a
+  stage: A
+  feedback_enabled: false
+
+model:
+  name: stable-diffusion-v1-5
+  resolution: 512
+  dtype: float16
+
+sampling:
+  scheduler: DDIM
+  num_inference_steps: 50
+  eta: 0.0
+
+cfg:
+  scale: 7.5
+
+cads:
+  schedule_coordinate: loop_progress
+  # Frozen on COCO-Dev-50 by the preregistered coarse-to-fine search.
+  fixed_rho_a: 0.55
+  hold_until_progress: 0.10
+  hard_off_progress: 0.60
+  noise_scale: 0.20
+  rescale: true
+  rescale_mix: 0.70
+  content_tokens_only: true
+  clean_unconditional: true
+  statistics: per_sample_content_tokens_fp32
+
+randomness:
+  latent_seed_stream: caller_owned
+  condition_seed_stream: independent_per_candidate
+  condition_stream_uses_global_rng: false
+  negative_condition_seed_stream: none

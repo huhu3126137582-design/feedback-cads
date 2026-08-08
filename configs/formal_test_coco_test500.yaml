@@ -1,0 +1,129 @@
+experiment:
+  name: formal_test_coco_test500
+  stage: final-evaluation
+  protocol_revision: 1
+  protocol_frozen_before_any_formal_image_generation: true
+  protocol_frozen_before_any_formal_metric_inspection: true
+  formal_test_manifest_prepared: true
+  formal_test_images_generated_at_freeze: false
+  formal_test_metrics_seen_at_freeze: false
+  one_shot_evaluation: true
+  no_parameter_selection_or_tuning_on_test: true
+
+dataset:
+  path: data/coco/coco_test500.jsonl
+  sha256: ed2251c29003aea93bf2c623861d16187bbddb093382d3d029aa5787e5f361d5
+  split_metadata_path: data/coco/coco_caption_splits.json
+  split_metadata_sha256: fc57ee3adeadcc155343c1a6dd9ac59f419dfce771855d06be470deae506a83f
+  expected_prompts: 500
+  expected_split: COCO-Test-500
+  source: MS-COCO 2017 validation captions
+  disjoint_from_development: true
+
+model:
+  snapshot: models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+  revision: 451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+  resolution: 512
+  dtype: float16
+
+sampling:
+  scheduler: DDIM
+  num_inference_steps: 50
+  eta: 0.0
+  cfg_scale: 7.5
+  candidates_per_prompt: 8
+  prompt_batch_size: 1
+  method_order: [vanilla, original_cads, a_star, b_feedback]
+
+methods:
+  vanilla:
+    condition_pollution: false
+    feedback: false
+  original_cads:
+    config_path: configs/original_cads_sd15.yaml
+    config_sha256: 575bd127ef782ce372d0ba5157611c845cece07b2b88ec8dba8efc4e86eabec3
+    method_claim: paper-algorithm-faithful_CADS_adapted_to_SD1.5
+    numerical_reproduction_of_paper_sd_results: false
+  a_star:
+    config_path: configs/clean_unconditional_cads_sd15.yaml
+    config_sha256: 4de0198dbb2a4083020433066e3de766cacb364281474943ac9d4c470f85da27
+    fixed_rho: 0.55
+    selection_path: outputs/a_star_coco_dev50/A_STAR_SELECTION.json
+    selection_sha256: e2a360b76ab53146b991c4d81531dd7f3a5803e2ebb2fe76b679361bd1e06a5a
+  b_feedback:
+    config_path: configs/feedback_b_frozen_sd15.yaml
+    config_sha256: bcd83bb00c54d07ff16b5db2b1d723c1bb56d6b1cea2aa235e8c3613324916fa
+    fixed_reference_margin_alpha: 0.15
+    selection_path: outputs/b_feedback_margin_selection_extended_coco_dev50/ALPHA_SELECTION_EXTENDED.json
+    selection_sha256: 619c1dd3582b0bc6b8b823e622e61724f754d33d6883943550164acc9ca73e45
+    reference_path: outputs/a_star_reference_coco_dev50/reference_curves.json
+    reference_sha256: c2ae2024f06c699eb9e51e063ab9aea2f118c03663d6918965c1e639f9667382
+
+randomness:
+  latent_seed_base: 832000
+  latent_prompt_stride: 1000
+  condition_seed_base: 12920000
+  condition_prompt_stride: 100003
+  candidate_seed_increment: 1
+  latent_seed_range_disjoint_from_development: true
+  condition_seed_range_disjoint_from_development: true
+  identical_prompt_candidate_latents_across_all_methods: true
+  identical_positive_condition_seed_across_cads_methods: true
+  vanilla_does_not_consume_condition_noise: true
+  original_negative_condition_seed_derivation: positive_seed_plus_10000019_mod_2pow63_minus_1
+  global_cpu_cuda_rng_must_remain_unchanged: true
+
+generation:
+  expected_images_per_method: 4000
+  expected_total_images: 16000
+  save_format: PNG
+  output_root: outputs/formal_test_coco_test500
+  allow_resume_after_technical_interruption: true
+  resume_requires_exact_protocol_hash_and_artifact_hashes: true
+  do_not_compute_or_inspect_quality_metrics_until_all_methods_complete: true
+  do_not_change_prompts_seeds_or_parameters_after_partial_generation: true
+
+evaluation:
+  metric_config_path: configs/a_strength_curve_metrics.yaml
+  metric_config_sha256: 5aeff71b050df0f8e95f4532fff854d3b13be5cb212fc8379c8c836e95a73188
+  statistical_unit: prompt
+  bootstrap_replicates: 10000
+  bootstrap_seed: 20260808
+  confidence_interval: 0.95
+  primary_comparison: b_feedback_vs_a_star
+  secondary_comparisons:
+    - original_cads_vs_vanilla
+    - a_star_vs_vanilla
+    - b_feedback_vs_vanilla
+  primary_diversity_metric: dino_diversity
+  safeguard_metrics: [clipscore, hpsv2]
+  additional_reported_metrics:
+    - clip_image_diversity
+    - clip_alignment_cosine
+    - prompt_run_seconds
+    - unet_calls
+  noninferiority_margin_formula: 0.01_times_comparator_test_mean
+  noninferiority_rule: ci95_lower_strictly_greater_than_negative_margin
+  strong_improvement_rule: ci95_lower_strictly_greater_than_zero
+  no_multiple_comparison_claim_for_secondary_exploratory_comparisons: true
+
+acceptance:
+  assessment_success:
+    comparison: b_feedback_vs_a_star
+    require_all_three_core_metrics_noninferior: true
+    require_at_least_one_core_metric_point_estimate_improvement: true
+    core_metrics: [dino_diversity, clipscore, hpsv2]
+  closed_loop_diversity_success:
+    comparison: b_feedback_vs_a_star
+    require_dino_point_estimate_improvement: true
+    require_clipscore_noninferiority: true
+    require_hpsv2_noninferiority: true
+  strong_research_result:
+    comparison: b_feedback_vs_a_star
+    require_at_least_one_core_metric_ci95_lower_above_zero: true
+    require_all_other_core_metrics_noninferior: true
+  claim_policy:
+    point_only_success_label: assessment_requirement_met_but_statistical_evidence_limited
+    statistically_significant_label_requires_strong_research_result: true
+    always_report_effect_size_ci_failures_and_compute_cost: true
+    pareto_frontier_is_supplementary_only: true

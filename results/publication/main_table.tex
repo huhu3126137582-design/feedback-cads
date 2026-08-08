@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Formal results on COCO-Test-500. Values are prompt-group means over 500 prompts with eight images per prompt.}
+\label{tab:formal-results}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Method & DINO $\uparrow$ & CLIP div. $\uparrow$ & CLIPScore $\uparrow$ & HPSv2 $\uparrow$ & s/prompt $\downarrow$ & UNet \\
+\midrule
+Vanilla SD v1.5 & 0.200100 & 0.076901 & \textbf{0.785446} & \textbf{0.260481} & \textbf{7.1916} & 50 \\
+Original CADS & \textbf{0.235120} & \textbf{0.096201} & 0.778002 & 0.246984 & 7.2249 & 50 \\
+A\textsuperscript{*} (fixed CADS) & 0.203794 & 0.078464 & 0.782338 & 0.258324 & 7.2304 & 50 \\
+Feedback-CADS (B\textsuperscript{*}) & 0.204895† & 0.078677 & 0.781730‡ & 0.257690‡ & 7.2686 & 50 \\
+\bottomrule
+\end{tabular}
+\begin{minipage}{0.99\linewidth}
+\footnotesize † Positive 95\% paired-bootstrap CI versus A*. ‡ Non-inferior to A* under the preregistered 1\% margin. Bold denotes the best mean per column; runtime is hardware-dependent.
+\end{minipage}
+\end{table}

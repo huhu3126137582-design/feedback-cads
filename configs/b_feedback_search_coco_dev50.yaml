@@ -1,0 +1,214 @@
+format_version: 1
+description: Consolidated COCO-Dev-50 Feedback-CADS reference-margin profiles.
+
+shared:
+  dataset: &dataset
+    path: data/coco/coco_dev50.jsonl
+    sha256: 940030cc9f07a787f2041ea8144f831ad65a33cd2a55ee116f74ca4710b35754
+    expected_prompts: 50
+    split: COCO-Dev-50
+  model: &model
+    snapshot: models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+    resolution: 512
+    dtype: float16
+  sampling: &sampling
+    scheduler: DDIM
+    num_inference_steps: 50
+    eta: 0.0
+    cfg_scale: 7.5
+    candidates_per_prompt: 8
+  cads: &cads
+    noise_scale: 0.20
+    rescale: true
+    rescale_mix: 0.70
+    hold_until_progress: 0.10
+    hard_off_progress: 0.60
+    content_tokens_only: true
+    clean_unconditional: true
+  reference: &reference
+    path: outputs/a_star_reference_coco_dev50/reference_curves.json
+    sha256: c2ae2024f06c699eb9e51e063ab9aea2f118c03663d6918965c1e639f9667382
+  paired_a_star: &paired_a_star
+    rho: 0.55
+    manifest: outputs/a_strength_curve_coco_dev50_fine/manifest.jsonl
+    manifest_sha256: 1073469f5775f2588691b42af7244672941567ce15513b237613f18a7ce738b6
+    per_prompt_metrics: outputs/a_strength_curve_coco_dev50_fine/metrics/per_prompt.jsonl
+    per_prompt_metrics_sha256: ceebdaf62a8e5f50b2707d667720bfaaf4f4bfc0af8efc90f18bb3b062240e22
+    selection: outputs/a_star_coco_dev50/A_STAR_SELECTION.json
+    selection_sha256: e2a360b76ab53146b991c4d81531dd7f3a5803e2ebb2fe76b679361bd1e06a5a
+  prerequisite_alpha0: &prerequisite_alpha0
+    paired_report: outputs/b_feedback_coco_dev50/metrics/paired_bootstrap.json
+    sha256: 7240cb25f508bb0ab9310d591a9cbfb70c2501a62e8742a225e7aa9f0cc9f560
+  prerequisite_stage1: &prerequisite_stage1
+    path: outputs/b_feedback_margin_selection_coco_dev50/ALPHA_SELECTION.json
+    sha256: 78d39a945ef58d129477cd0e18bdd70e1c81831cb422ca8f6892be240745cefd
+  stage1_rule: &stage1_rule
+    alpha_grid: [0.0, 0.05, 0.10]
+    require_clipscore_noninferiority: true
+    require_hpsv2_noninferiority: true
+    maximum_mean_active_boundary_rate: 0.25
+    maximize: dino_diversity
+    tie_breaker: smaller_alpha
+  extension_rule: &extension_rule
+    alpha_grid: [0.0, 0.05, 0.10, 0.15, 0.20]
+    added_alpha_grid: [0.15, 0.20]
+    absolute_stop_alpha: 0.20
+    require_clipscore_noninferiority: true
+    require_hpsv2_noninferiority: true
+    maximum_mean_active_boundary_rate: 0.25
+    maximize: dino_diversity
+    tie_breaker: smaller_alpha
+    no_further_extension: true
+  randomness: &randomness
+    latent_seed_base: 320000
+    latent_prompt_stride: 1000
+    condition_seed_base: 2920000
+    condition_prompt_stride: 100003
+    paired_latents_with_a_star: true
+    shared_condition_bank_with_a_star: true
+  evaluation: &evaluation
+    metric_config: configs/evaluation_metrics_sd15.yaml
+    bootstrap_replicates: 10000
+    bootstrap_seed: 20260808
+    statistical_unit: prompt
+    formal_test_data_used: false
+
+profiles:
+  mvp_alpha0_audit:
+    legacy_source_name: feedback_mvp_sd15.yaml
+    legacy_sha256: 0011f7c55c94c0bd91e693f61ff1179f59eca0053ffa19bb55156c5b75f3442c
+    output_dir: outputs/b_stage2_controller_smoke
+    config:
+      method:
+        name: feedback-cads-b-mvp-alpha0-audit
+        stage: B
+        feedback_enabled: true
+        formal_test_data_used: false
+        final_selected_configuration: false
+      model:
+        name: stable-diffusion-v1-5
+        resolution: 512
+        dtype: float16
+      sampling: *sampling
+      cads:
+        schedule_coordinate: loop_progress
+        hold_until_progress: 0.10
+        hard_off_progress: 0.60
+        noise_scale: 0.20
+        rescale: true
+        rescale_mix: 0.70
+        content_tokens_only: true
+        clean_unconditional: true
+        statistics: per_sample_content_tokens_fp32
+      feedback:
+        initial_rho: 0.55
+        k_diversity: 0.08
+        epsilon: 1.0e-6
+        reference_margin_alpha: 0.0
+        group_size: 8
+        pool_size: 8
+        dz_control_start_progress: 0.20
+        update_delay_steps: 1
+        hard_off_stops_updates: true
+      reference:
+        path: outputs/a_star_reference_coco_dev50/reference_curves.json
+        sha256: c2ae2024f06c699eb9e51e063ab9aea2f118c03663d6918965c1e639f9667382
+        source_split: COCO-Dev-50
+        source_rho_a_star: 0.55
+        formal_test_data_used: false
+      randomness:
+        latent_seed_stream: caller_owned
+        condition_seed_stream: independent_per_candidate
+        consume_one_condition_draw_per_active_step: true
+        condition_stream_uses_global_rng: false
+        negative_condition_seed_stream: none
+
+  alpha_0p00:
+    legacy_source_name: b_feedback_coco_dev50.yaml
+    legacy_sha256: 8e6445d2ad9bf8fa2ccd753990f34ac9aeb45d41d8193bed676c87e1a5c53b45
+    output_dir: outputs/b_feedback_coco_dev50
+    config:
+      experiment: {name: b_feedback_coco_dev50, stage: B, purpose: feedback_mvp_paired_a_star_development, formal_test_data_used: false}
+      dataset: *dataset
+      model: *model
+      sampling: *sampling
+      cads: *cads
+      feedback: {initial_rho: 0.55, k_diversity: 0.08, epsilon: 1.0e-6, reference_margin_alpha: 0.0, group_size: 8, pool_size: 8}
+      reference: *reference
+      paired_a_star: *paired_a_star
+      randomness: *randomness
+      evaluation: *evaluation
+
+  alpha_0p05:
+    legacy_source_name: b_feedback_alpha_0p05_coco_dev50.yaml
+    legacy_sha256: fc9ac1163a60840c472d34fb082fcfecd1390b7773bfd976820e5715cecc016e
+    output_dir: outputs/b_feedback_alpha_0p05_coco_dev50
+    config:
+      experiment: {name: b_feedback_alpha_0p05_coco_dev50, stage: B, purpose: feedback_margin_ablation_development, formal_test_data_used: false}
+      dataset: *dataset
+      model: *model
+      sampling: *sampling
+      cads: *cads
+      feedback: {initial_rho: 0.55, k_diversity: 0.08, epsilon: 1.0e-6, reference_margin_alpha: 0.05, group_size: 8, pool_size: 8}
+      reference: *reference
+      paired_a_star: *paired_a_star
+      prerequisite_alpha0: *prerequisite_alpha0
+      selection_rule: *stage1_rule
+      randomness: *randomness
+      evaluation: *evaluation
+
+  alpha_0p10:
+    legacy_source_name: b_feedback_alpha_0p10_coco_dev50.yaml
+    legacy_sha256: 7373a1e84f60a03f984aaef1772e4d32ee3ba8d10e47a1aa725a8ccdd73daaaf
+    output_dir: outputs/b_feedback_alpha_0p10_coco_dev50
+    config:
+      experiment: {name: b_feedback_alpha_0p10_coco_dev50, stage: B, purpose: feedback_margin_ablation_development, formal_test_data_used: false}
+      dataset: *dataset
+      model: *model
+      sampling: *sampling
+      cads: *cads
+      feedback: {initial_rho: 0.55, k_diversity: 0.08, epsilon: 1.0e-6, reference_margin_alpha: 0.10, group_size: 8, pool_size: 8}
+      reference: *reference
+      paired_a_star: *paired_a_star
+      prerequisite_alpha0: *prerequisite_alpha0
+      selection_rule: *stage1_rule
+      randomness: *randomness
+      evaluation: *evaluation
+
+  alpha_0p15:
+    legacy_source_name: b_feedback_alpha_0p15_coco_dev50.yaml
+    legacy_sha256: 9a4f16b8715f35aec213513ca82bc90885ad4ee79c9a3a933365d12ea30f993b
+    output_dir: outputs/b_feedback_alpha_0p15_coco_dev50
+    config:
+      experiment: {name: b_feedback_alpha_0p15_coco_dev50, stage: B, purpose: adaptive_feedback_margin_extension_development, formal_test_data_used: false, adaptive_after_stage1_results: true}
+      dataset: *dataset
+      model: *model
+      sampling: *sampling
+      cads: *cads
+      feedback: {initial_rho: 0.55, k_diversity: 0.08, epsilon: 1.0e-6, reference_margin_alpha: 0.15, group_size: 8, pool_size: 8}
+      reference: *reference
+      paired_a_star: *paired_a_star
+      prerequisite_alpha0: *prerequisite_alpha0
+      prerequisite_stage1_selection: *prerequisite_stage1
+      extension_selection_rule: *extension_rule
+      randomness: *randomness
+      evaluation: *evaluation
+
+  alpha_0p20:
+    legacy_source_name: b_feedback_alpha_0p20_coco_dev50.yaml
+    legacy_sha256: d41aa9a46575d5822dc338f61195a32af59cc89677f1b13a4aa4646afd953a12
+    output_dir: outputs/b_feedback_alpha_0p20_coco_dev50
+    config:
+      experiment: {name: b_feedback_alpha_0p20_coco_dev50, stage: B, purpose: adaptive_feedback_margin_extension_development, formal_test_data_used: false, adaptive_after_stage1_results: true}
+      dataset: *dataset
+      model: *model
+      sampling: *sampling
+      cads: *cads
+      feedback: {initial_rho: 0.55, k_diversity: 0.08, epsilon: 1.0e-6, reference_margin_alpha: 0.20, group_size: 8, pool_size: 8}
+      reference: *reference
+      paired_a_star: *paired_a_star
+      prerequisite_alpha0: *prerequisite_alpha0
+      prerequisite_stage1_selection: *prerequisite_stage1
+      extension_selection_rule: *extension_rule
+      randomness: *randomness
+      evaluation: *evaluation

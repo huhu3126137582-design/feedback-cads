@@ -1,0 +1,223 @@
+{
+  "evaluation_fingerprint": "a920a97f3f5ec20d8de731647fa960a03eb3b11cc16e9315cb1d184e70566db7",
+  "formal_protocol_sha256": "9d19e02e284aefe0ed58fdc5a47dd0a0fec0966936a40dd9e281d2c97d0161ef",
+  "statistical_unit": "prompt",
+  "prompt_count": 500,
+  "candidates_per_prompt": 8,
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20260808,
+  "confidence_interval": 0.95,
+  "comparisons": {
+    "b_feedback_vs_a_star": {
+      "method": "b_feedback",
+      "comparator": "a_star",
+      "primary": true,
+      "metrics": {
+        "dino_diversity": {
+          "method_mean": 0.20489493938186296,
+          "comparator_mean": 0.20379400827954072,
+          "mean_difference": 0.0011009311023222623,
+          "median_difference": 0.0006825154265314576,
+          "ci95_lower": 0.0002894675778701227,
+          "ci95_upper": 0.0019257115144876381,
+          "paired_difference_sd": 0.009224233372514096,
+          "standardized_paired_effect": 0.11935204345574789,
+          "noninferiority_margin": 0.002037940082795407,
+          "noninferior": true,
+          "point_estimate_improved": true,
+          "strong_improvement": true
+        },
+        "clipscore": {
+          "method_mean": 0.7817296518087387,
+          "comparator_mean": 0.782337622642517,
+          "mean_difference": -0.0006079708337783814,
+          "median_difference": -0.0001240372657775879,
+          "ci95_lower": -0.001271540254354477,
+          "ci95_upper": -1.2106531858444277e-05,
+          "paired_difference_sd": 0.007159393044298485,
+          "standardized_paired_effect": -0.08491932626363491,
+          "noninferiority_margin": 0.00782337622642517,
+          "noninferior": true,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        },
+        "hpsv2": {
+          "method_mean": 0.25768972778320315,
+          "comparator_mean": 0.258323974609375,
+          "mean_difference": -0.000634246826171875,
+          "median_difference": -0.00048828125,
+          "ci95_lower": -0.0008562667846679688,
+          "ci95_upper": -0.0004149467468261719,
+          "paired_difference_sd": 0.002524332218658719,
+          "standardized_paired_effect": -0.2512533102750146,
+          "noninferiority_margin": 0.00258323974609375,
+          "noninferior": true,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        }
+      }
+    },
+    "original_cads_vs_vanilla": {
+      "method": "original_cads",
+      "comparator": "vanilla",
+      "primary": false,
+      "metrics": {
+        "dino_diversity": {
+          "method_mean": 0.23512036190547211,
+          "comparator_mean": 0.20009954334187072,
+          "mean_difference": 0.03502081856360144,
+          "median_difference": 0.03205920417253225,
+          "ci95_lower": 0.03162923632734321,
+          "ci95_upper": 0.03849063587619904,
+          "paired_difference_sd": 0.03925900560130275,
+          "standardized_paired_effect": 0.8920454817235444,
+          "noninferiority_margin": 0.0020009954334187074,
+          "noninferior": true,
+          "point_estimate_improved": true,
+          "strong_improvement": true
+        },
+        "clipscore": {
+          "method_mean": 0.7780021307468414,
+          "comparator_mean": 0.7854455689191818,
+          "mean_difference": -0.007443438172340393,
+          "median_difference": -0.007535606622695923,
+          "ci95_lower": -0.009595329156517982,
+          "ci95_upper": -0.00533812939822674,
+          "paired_difference_sd": 0.02433640213537683,
+          "standardized_paired_effect": -0.30585614631672164,
+          "noninferiority_margin": 0.007854455689191818,
+          "noninferior": false,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        },
+        "hpsv2": {
+          "method_mean": 0.24698362731933593,
+          "comparator_mean": 0.2604810791015625,
+          "mean_difference": -0.013497451782226562,
+          "median_difference": -0.012725830078125,
+          "ci95_lower": -0.014633154296875,
+          "ci95_upper": -0.01233917999267578,
+          "paired_difference_sd": 0.013163061311882208,
+          "standardized_paired_effect": -1.0254037007365833,
+          "noninferiority_margin": 0.002604810791015625,
+          "noninferior": false,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        }
+      }
+    },
+    "a_star_vs_vanilla": {
+      "method": "a_star",
+      "comparator": "vanilla",
+      "primary": false,
+      "metrics": {
+        "dino_diversity": {
+          "method_mean": 0.20379400827954072,
+          "comparator_mean": 0.20009954334187072,
+          "mean_difference": 0.003694464937670006,
+          "median_difference": 0.003527491316234685,
+          "ci95_lower": 0.0020376164727765934,
+          "ci95_upper": 0.005330063640223889,
+          "paired_difference_sd": 0.01873842485793959,
+          "standardized_paired_effect": 0.19715984484707835,
+          "noninferiority_margin": 0.0020009954334187074,
+          "noninferior": true,
+          "point_estimate_improved": true,
+          "strong_improvement": true
+        },
+        "clipscore": {
+          "method_mean": 0.782337622642517,
+          "comparator_mean": 0.7854455689191818,
+          "mean_difference": -0.003107946276664734,
+          "median_difference": -0.002263575792312622,
+          "ci95_lower": -0.0043063829511404035,
+          "ci95_upper": -0.0019700149953365328,
+          "paired_difference_sd": 0.01337321516055616,
+          "standardized_paired_effect": -0.23240082802462605,
+          "noninferiority_margin": 0.007854455689191818,
+          "noninferior": true,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        },
+        "hpsv2": {
+          "method_mean": 0.258323974609375,
+          "comparator_mean": 0.2604810791015625,
+          "mean_difference": -0.0021571044921875,
+          "median_difference": -0.00177001953125,
+          "ci95_lower": -0.0026599159240722654,
+          "ci95_upper": -0.0016730560302734376,
+          "paired_difference_sd": 0.00571841343041726,
+          "standardized_paired_effect": -0.3772208005656738,
+          "noninferiority_margin": 0.002604810791015625,
+          "noninferior": false,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        }
+      }
+    },
+    "b_feedback_vs_vanilla": {
+      "method": "b_feedback",
+      "comparator": "vanilla",
+      "primary": false,
+      "metrics": {
+        "dino_diversity": {
+          "method_mean": 0.20489493938186296,
+          "comparator_mean": 0.20009954334187072,
+          "mean_difference": 0.004795396039992269,
+          "median_difference": 0.003743895752346238,
+          "ci95_lower": 0.002978813336344563,
+          "ci95_upper": 0.006596765395943983,
+          "paired_difference_sd": 0.020172859315976236,
+          "standardized_paired_effect": 0.23771523733348374,
+          "noninferiority_margin": 0.0020009954334187074,
+          "noninferior": true,
+          "point_estimate_improved": true,
+          "strong_improvement": true
+        },
+        "clipscore": {
+          "method_mean": 0.7817296518087387,
+          "comparator_mean": 0.7854455689191818,
+          "mean_difference": -0.003715917110443115,
+          "median_difference": -0.002464205026626587,
+          "ci95_lower": -0.005083677971363068,
+          "ci95_upper": -0.0024234471261501316,
+          "paired_difference_sd": 0.015333608610667066,
+          "standardized_paired_effect": -0.2423380695825299,
+          "noninferiority_margin": 0.007854455689191818,
+          "noninferior": true,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        },
+        "hpsv2": {
+          "method_mean": 0.25768972778320315,
+          "comparator_mean": 0.2604810791015625,
+          "mean_difference": -0.002791351318359375,
+          "median_difference": -0.00251007080078125,
+          "ci95_lower": -0.0033448860168457033,
+          "ci95_upper": -0.0022657127380371093,
+          "paired_difference_sd": 0.006271800131587985,
+          "standardized_paired_effect": -0.4450638189665365,
+          "noninferiority_margin": 0.002604810791015625,
+          "noninferior": false,
+          "point_estimate_improved": false,
+          "strong_improvement": false
+        }
+      }
+    }
+  },
+  "primary_acceptance": {
+    "comparison": "b_feedback_vs_a_star",
+    "all_three_core_metrics_noninferior": true,
+    "point_estimate_improvements": [
+      "dino_diversity"
+    ],
+    "strong_improvements": [
+      "dino_diversity"
+    ],
+    "assessment_success": true,
+    "closed_loop_diversity_success": true,
+    "strong_research_result": true,
+    "result_label": "statistically_significant_strong_research_result"
+  },
+  "secondary_comparisons_are_exploratory": true
+}

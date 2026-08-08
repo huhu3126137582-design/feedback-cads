@@ -1,0 +1,151 @@
+{
+  "statistical_unit": "prompt",
+  "baseline_rho": 0.0,
+  "replicates": 10000,
+  "comparisons": [
+    {
+      "rho": 0.25,
+      "metric": "dino_diversity",
+      "mean_difference": 0.0004896458572312446,
+      "median_difference": -0.0012747698730293383,
+      "ci95_lower": -0.0028855001560406093,
+      "ci95_upper": 0.004235429750879136
+    },
+    {
+      "rho": 0.25,
+      "metric": "clipscore",
+      "mean_difference": 0.0002517533302307129,
+      "median_difference": 0.0011538863182067871,
+      "ci95_lower": -0.001860882580280304,
+      "ci95_upper": 0.0023690188229084017
+    },
+    {
+      "rho": 0.25,
+      "metric": "hpsv2",
+      "mean_difference": -0.00051422119140625,
+      "median_difference": -0.0008544921875,
+      "ci95_lower": -0.0012350540161132813,
+      "ci95_upper": 0.00030033111572265567
+    },
+    {
+      "rho": 0.3,
+      "metric": "dino_diversity",
+      "mean_difference": 0.0017241560080427701,
+      "median_difference": 0.0001991759692574202,
+      "ci95_lower": -0.0022322604135106773,
+      "ci95_upper": 0.005886401992519217
+    },
+    {
+      "rho": 0.3,
+      "metric": "clipscore",
+      "mean_difference": -5.0958395004272464e-05,
+      "median_difference": -0.0008099973201751709,
+      "ci95_lower": -0.002615000784397125,
+      "ci95_upper": 0.002660054832696914
+    },
+    {
+      "rho": 0.3,
+      "metric": "hpsv2",
+      "mean_difference": -0.000537109375,
+      "median_difference": -0.00080108642578125,
+      "ci95_lower": -0.0013806381225585937,
+      "ci95_upper": 0.0004162979125976557
+    },
+    {
+      "rho": 0.35,
+      "metric": "dino_diversity",
+      "mean_difference": 0.002723949414750394,
+      "median_difference": 0.0005102692116747687,
+      "ci95_lower": -0.0010203660281684704,
+      "ci95_upper": 0.0068781860678329525
+    },
+    {
+      "rho": 0.35,
+      "metric": "clipscore",
+      "mean_difference": -0.0012943637371063232,
+      "median_difference": -0.0008297860622406006,
+      "ci95_lower": -0.003944295853376388,
+      "ci95_upper": 0.001300347208976745
+    },
+    {
+      "rho": 0.35,
+      "metric": "hpsv2",
+      "mean_difference": -0.000699462890625,
+      "median_difference": -0.000823974609375,
+      "ci95_lower": -0.0015869216918945313,
+      "ci95_upper": 0.00022410583496093595
+    },
+    {
+      "rho": 0.45,
+      "metric": "dino_diversity",
+      "mean_difference": 0.0030950197116577714,
+      "median_difference": 0.0021576287155883056,
+      "ci95_lower": -0.0008015924490922994,
+      "ci95_upper": 0.007315175537260988
+    },
+    {
+      "rho": 0.45,
+      "metric": "clipscore",
+      "mean_difference": -0.0015631890296936035,
+      "median_difference": -0.0009958446025848389,
+      "ci95_lower": -0.004976524442434311,
+      "ci95_upper": 0.0017165588438510892
+    },
+    {
+      "rho": 0.45,
+      "metric": "hpsv2",
+      "mean_difference": -0.00097991943359375,
+      "median_difference": -0.0013275146484375,
+      "ci95_lower": -0.002236328125,
+      "ci95_upper": 0.00036529541015625
+    },
+    {
+      "rho": 0.5,
+      "metric": "dino_diversity",
+      "mean_difference": 0.003006175708599218,
+      "median_difference": 0.0017293630194734066,
+      "ci95_lower": -0.0015129836191228798,
+      "ci95_upper": 0.007994527304947966
+    },
+    {
+      "rho": 0.5,
+      "metric": "clipscore",
+      "mean_difference": -0.0015960276126861573,
+      "median_difference": -0.0006667673587799072,
+      "ci95_lower": -0.005119399458169937,
+      "ci95_upper": 0.0017657096683979016
+    },
+    {
+      "rho": 0.5,
+      "metric": "hpsv2",
+      "mean_difference": -0.0010400390625,
+      "median_difference": -0.0013580322265625,
+      "ci95_lower": -0.002384040832519531,
+      "ci95_upper": 0.00035737609863281233
+    },
+    {
+      "rho": 0.55,
+      "metric": "dino_diversity",
+      "mean_difference": 0.0035193140727259576,
+      "median_difference": -0.0007696454740223554,
+      "ci95_lower": -0.0013706480393955581,
+      "ci95_upper": 0.00877771780540574
+    },
+    {
+      "rho": 0.55,
+      "metric": "clipscore",
+      "mean_difference": -0.0019430470466613768,
+      "median_difference": 0.0001106560230255127,
+      "ci95_lower": -0.005647506922483444,
+      "ci95_upper": 0.001633176416158676
+    },
+    {
+      "rho": 0.55,
+      "metric": "hpsv2",
+      "mean_difference": -0.00098236083984375,
+      "median_difference": -0.000762939453125,
+      "ci95_lower": -0.0022373504638671876,
+      "ci95_upper": 0.0003033599853515623
+    }
+  ]
+}

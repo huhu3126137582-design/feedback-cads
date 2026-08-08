@@ -1,0 +1,215 @@
+format_version: 1
+description: Consolidated frozen evaluation, reporting, and publication profiles.
+
+profiles:
+  evaluation:
+    legacy_source_name: formal_evaluation_coco_test500.yaml
+    legacy_sha256: 645db8fc998b0986fe818b4a3f46247518553af532859ab5594f6523e37d25a1
+    config:
+      evaluation:
+        name: formal_evaluation_coco_test500
+        revision: 1
+        frozen_before_any_formal_metric_calculation: true
+        formal_metrics_computed_at_freeze: false
+        evaluate_all_methods_before_reporting: true
+        no_subset_evaluation: true
+        no_metric_skipping: true
+      formal_protocol:
+        path: configs/formal_test_coco_test500.yaml
+        sha256: 9d19e02e284aefe0ed58fdc5a47dd0a0fec0966936a40dd9e281d2c97d0161ef
+      generation:
+        root: outputs/formal_test_coco_test500
+        manifest: outputs/formal_test_coco_test500/manifest.jsonl
+        manifest_sha256: e89e4975c1d7336cd385c1560170db65b67db8ec122a61d50f5be6e642c77604
+        completion: outputs/formal_test_coco_test500/generation_complete.json
+        completion_sha256: 486e59d2daff8bc0e70925becce87221d06eb1885ee4282a5679ffb2bbcea667
+        integrity_audit: outputs/formal_test_coco_test500/technical_integrity_audit.json
+        integrity_audit_sha256: 562e84710a17c997660676dd0c212757d2ad993e42c22f5baeffb2706fb97bcb
+        expected_images: 16000
+        expected_prompts: 500
+        candidates_per_prompt: 8
+        method_order: [vanilla, original_cads, a_star, b_feedback]
+      metric_protocol:
+        path: configs/evaluation_metrics_sd15.yaml
+        sha256: 5aeff71b050df0f8e95f4532fff854d3b13be5cb212fc8379c8c836e95a73188
+        dino_definition: mean_unique_pair_one_minus_cosine_over_two_on_cls_features
+        clip_image_diversity_definition: mean_unique_pair_one_minus_cosine_over_two
+        clipscore_definition: 2.5_times_max_image_text_cosine_zero
+        hps_version: v2.1
+      metric_weights:
+        dino:
+          path: models/huggingface/hub/models--facebook--dinov2-base/snapshots/f9e44c814b77203eaa57a6bdbbd535f21ede1415/model.safetensors
+          sha256: d73036b56966966d07975d696bde331762f37297e2f095de8cea0040c3aa0841
+        clip:
+          path: models/huggingface/hub/models--sentence-transformers--clip-ViT-B-32/snapshots/327ab6726d33c0e22f920c83f2ff9e4bd38ca37f/0_CLIPModel/model.safetensors
+          sha256: 99d28a652e6ec46629ab7047a0ac82c69b1fe11e0ce672c43af65d3a9a3fc05d
+        hpsv2:
+          path: models/huggingface/hub/models--xswu--HPSv2/snapshots/697403c78157020a1ae59d23f111aa58ced35b0a/HPS_v2.1_compressed.pt
+          sha256: c57a38fb4a2f7e7c15bf00da2ea377cdf165448b4dd1052a484c215a998c9837
+      runtime:
+        device: cuda
+        offline_model_loading: true
+        dino_batch_size: 32
+        clip_batch_size: 32
+        hpsv2_batch_size: 16
+        staging_directory: outputs/formal_test_coco_test500/.formal_metrics_in_progress
+        final_directory: outputs/formal_test_coco_test500/metrics
+        allow_exact_fingerprint_resume: true
+        do_not_print_metric_values_until_complete: true
+      statistics:
+        statistical_unit: prompt
+        bootstrap_replicates: 10000
+        bootstrap_seed: 20260808
+        confidence_interval: 0.95
+        noninferiority_margin: 0.01_times_comparator_test_mean
+        noninferiority_rule: ci95_lower_strictly_greater_than_negative_margin
+        strong_improvement_rule: ci95_lower_strictly_greater_than_zero
+        primary_comparison: b_feedback_vs_a_star
+        secondary_comparisons: [original_cads_vs_vanilla, a_star_vs_vanilla, b_feedback_vs_vanilla]
+        core_metrics: [dino_diversity, clipscore, hpsv2]
+      acceptance:
+        assessment_success:
+          require_all_three_core_metrics_noninferior: true
+          require_at_least_one_core_metric_point_estimate_improvement: true
+        closed_loop_diversity_success:
+          require_dino_point_estimate_improvement: true
+          require_clipscore_noninferiority: true
+          require_hpsv2_noninferiority: true
+        strong_research_result:
+          require_at_least_one_core_metric_ci95_lower_above_zero: true
+          require_all_other_core_metrics_noninferior: true
+
+  reporting:
+    legacy_source_name: formal_reporting_coco_test500.yaml
+    legacy_sha256: 1f007843415d5f1ae315ad9f75e4e93acbe20a918381d899fd5a2cbbb85af14b
+    config:
+      reporting:
+        name: formal_reporting_coco_test500
+        revision: 1
+        frozen_before_case_selection: true
+        post_evaluation_only: true
+        cannot_change_formal_acceptance: true
+      inputs:
+        summary: {path: outputs/formal_test_coco_test500/metrics/summary.json, sha256: 895dc433ccda5a9e1b90ff0b27cb8a1bdc3672fbcd7717ed87b60d2de4e2ea51}
+        per_image: {path: outputs/formal_test_coco_test500/metrics/per_image.jsonl, sha256: 5570d0d53e1ab675aef54c28746fcd14642a681455466991743f1ca44dec151f}
+        per_prompt: {path: outputs/formal_test_coco_test500/metrics/per_prompt.jsonl, sha256: c528715c66bea023e26461579f5ca531b9c495664e55082fc6b305756feb31ee}
+        paired_bootstrap: {path: outputs/formal_test_coco_test500/metrics/paired_bootstrap.json, sha256: a9c8619fcae01d2f2b3d86ca677f2052a4c04e8b6cb47ee7dc51c6b433574720}
+        evaluation_complete: {path: outputs/formal_test_coco_test500/metrics/evaluation_complete.json, sha256: f5bd3b9de88fe5777ceb7d833c113e6c20f70ae13ae0739488545db1e1537179}
+        evaluation_audit: {path: outputs/formal_test_coco_test500/metrics/evaluation_audit.json, sha256: 0f82380223dc5b61c99d273edafa67b9c87e30691a0fa0f46c8701e6732b20f6}
+      methods:
+        order: [vanilla, original_cads, a_star, b_feedback]
+        display_names: {vanilla: Vanilla, original_cads: Original CADS, a_star: A*, b_feedback: B*}
+      main_outputs:
+        directory: outputs/formal_test_coco_test500/reporting
+        main_table_csv: main_table.csv
+        main_table_markdown: main_table.md
+        primary_ci_figure: primary_b_vs_a_ci.png
+        method_means_figure: method_means.png
+        report_markdown: FORMAL_REPORT.md
+      low_score_cases:
+        selection_unit: prompt_group_mean
+        criteria: [clipscore, hpsv2]
+        direction: ascending
+        cases_per_method_per_criterion: 5
+        stable_tie_break: prompt_source_index_ascending
+        criteria_lists_are_separate: true
+        overlap_between_criteria_allowed: true
+        equal_slots_required_for_every_method_and_criterion: true
+        candidates_per_prompt: 8
+        contact_sheet_thumbnail_size: 128
+        contact_sheet_columns: 8
+        automatic_label: low_metric_candidate_not_human_confirmed_failure
+        manual_failure_confirmation_required: true
+        manual_annotation_fields: [manual_failure_confirmed, failure_type, notes]
+      figures:
+        dpi: 180
+        confidence_interval: 0.95
+        show_zero_line: true
+        show_negative_noninferiority_margin: true
+
+  publication_results:
+    legacy_source_name: publication_results_coco_test500.yaml
+    legacy_sha256: 8cc0de0c8367c9d00429181d4384c111d538e03c5670135aa84b999742ca1524
+    config:
+      reporting:
+        name: publication_results_coco_test500
+        revision: 1
+        post_evaluation_only: true
+        cannot_change_formal_acceptance: true
+        backend: python
+        style: nature_figure
+      inputs:
+        summary: {path: outputs/formal_test_coco_test500/metrics/summary.json, sha256: 895dc433ccda5a9e1b90ff0b27cb8a1bdc3672fbcd7717ed87b60d2de4e2ea51}
+        paired_bootstrap: {path: outputs/formal_test_coco_test500/metrics/paired_bootstrap.json, sha256: a9c8619fcae01d2f2b3d86ca677f2052a4c04e8b6cb47ee7dc51c6b433574720}
+        evaluation_complete: {path: outputs/formal_test_coco_test500/metrics/evaluation_complete.json, sha256: f5bd3b9de88fe5777ceb7d833c113e6c20f70ae13ae0739488545db1e1537179}
+        evaluation_audit: {path: outputs/formal_test_coco_test500/metrics/evaluation_audit.json, sha256: 0f82380223dc5b61c99d273edafa67b9c87e30691a0fa0f46c8701e6732b20f6}
+      methods:
+        order: [vanilla, original_cads, a_star, b_feedback]
+        display_names:
+          vanilla: Vanilla SD v1.5
+          original_cads: Original CADS
+          a_star: A* (fixed CADS)
+          b_feedback: Feedback-CADS (B*)
+      outputs:
+        directory: outputs/formal_test_coco_test500/publication
+        primary_figure_basename: primary_b_vs_a_ci_nature
+        png_dpi: 300
+        tiff_dpi: 600
+      figure_contract:
+        core_conclusion: Feedback-CADS significantly improves DINO diversity over the matched fixed-CADS baseline while retaining preregistered CLIPScore and HPSv2 noninferiority.
+        archetype: quantitative_grid
+        target_width_mm: 180
+        target_height_mm: 63
+        statistical_unit: prompt
+        prompt_count: 500
+        candidates_per_prompt: 8
+        bootstrap_replicates: 10000
+        confidence_interval: 0.95
+        primary_comparison: b_feedback_vs_a_star
+
+  project_figures:
+    legacy_source_name: project_figures_coco_test500.yaml
+    legacy_sha256: 37f6e55339e309c62948852037d017188fdb862fba02cf1c4ce4f831fff00478
+    config:
+      reporting:
+        name: project_figures_coco_test500
+        revision: 1
+        backend: python
+        style: nature_figure
+        post_evaluation_only: true
+        cannot_change_formal_acceptance: true
+      inputs:
+        formal_per_prompt: {path: outputs/formal_test_coco_test500/metrics/per_prompt.jsonl, sha256: c528715c66bea023e26461579f5ca531b9c495664e55082fc6b305756feb31ee}
+        formal_per_image: {path: outputs/formal_test_coco_test500/metrics/per_image.jsonl, sha256: 5570d0d53e1ab675aef54c28746fcd14642a681455466991743f1ca44dec151f}
+        formal_paired_bootstrap: {path: outputs/formal_test_coco_test500/metrics/paired_bootstrap.json, sha256: a9c8619fcae01d2f2b3d86ca677f2052a4c04e8b6cb47ee7dc51c6b433574720}
+        formal_generation_complete: {path: outputs/formal_test_coco_test500/generation_complete.json, sha256: 486e59d2daff8bc0e70925becce87221d06eb1885ee4282a5679ffb2bbcea667}
+        formal_generation_audit: {path: outputs/formal_test_coco_test500/technical_integrity_audit.json, sha256: 562e84710a17c997660676dd0c212757d2ad993e42c22f5baeffb2706fb97bcb}
+        a_star_selection: {path: outputs/a_star_coco_dev50/A_STAR_SELECTION.json, sha256: e2a360b76ab53146b991c4d81531dd7f3a5803e2ebb2fe76b679361bd1e06a5a}
+        b_margin_selection: {path: outputs/b_feedback_margin_selection_extended_coco_dev50/ALPHA_SELECTION_EXTENDED.json, sha256: 619c1dd3582b0bc6b8b823e622e61724f754d33d6883943550164acc9ca73e45}
+        reference_curves: {path: outputs/a_star_reference_coco_dev50/reference_curves.json, sha256: c2ae2024f06c699eb9e51e063ab9aea2f118c03663d6918965c1e639f9667382}
+      methods:
+        order: [vanilla, original_cads, a_star, b_feedback]
+        display_names:
+          vanilla: Vanilla SD v1.5
+          original_cads: Original CADS
+          a_star: A* (fixed CADS)
+          b_feedback: Feedback-CADS (B*)
+      qualitative_selection:
+        comparison: b_feedback_vs_a_star
+        require_prompt_level_clipscore_delta_at_least_negative_global_ni_margin: true
+        require_prompt_level_hpsv2_delta_at_least_negative_global_ni_margin: true
+        target: nearest_to_median_dino_delta_among_eligible_prompts
+        tie_break: prompt_source_index_ascending
+        candidates: [0, 1, 2, 3, 4, 5, 6, 7]
+        selection_is_post_evaluation_for_visualization_only: true
+      controller_dynamics:
+        diagnostics_glob: outputs/formal_test_coco_test500/images/b_feedback/*/diagnostics.json
+        expected_prompts: 500
+        expected_steps: 50
+        active_steps: 30
+        dz_start_step: 10
+      outputs:
+        directory: outputs/formal_test_coco_test500/publication/project_figures
+        png_dpi: 300
+        tiff_dpi: 600
+        width_mm: 180

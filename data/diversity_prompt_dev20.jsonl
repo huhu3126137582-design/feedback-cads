@@ -1,0 +1,20 @@
+{"prompt_id":"single_000","category":"single_subject","prompt":"a red fox standing in a misty pine forest"}
+{"prompt_id":"single_001","category":"single_subject","prompt":"a handcrafted ceramic teapot on a wooden table"}
+{"prompt_id":"single_002","category":"single_subject","prompt":"an astronaut walking across a frozen alien lake"}
+{"prompt_id":"single_003","category":"single_subject","prompt":"a vintage motorcycle parked beside a country road"}
+{"prompt_id":"multi_000","category":"multiple_subjects","prompt":"a cat and a dog having a picnic beside a river"}
+{"prompt_id":"multi_001","category":"multiple_subjects","prompt":"three colorful birds perched on different branches"}
+{"prompt_id":"multi_002","category":"multiple_subjects","prompt":"a friendly robot serving tea to two elderly people"}
+{"prompt_id":"multi_003","category":"multiple_subjects","prompt":"two sailboats crossing a bay beneath a lighthouse"}
+{"prompt_id":"action_000","category":"people_actions","prompt":"a ballet dancer performing a high leap on an empty stage"}
+{"prompt_id":"action_001","category":"people_actions","prompt":"a chef tossing vegetables in a flaming wok"}
+{"prompt_id":"action_002","category":"people_actions","prompt":"a skateboarder performing a trick above a city staircase"}
+{"prompt_id":"action_003","category":"people_actions","prompt":"a violinist performing under warm theater lights"}
+{"prompt_id":"scene_000","category":"scenes","prompt":"a mountain village at sunrise after fresh snowfall"}
+{"prompt_id":"scene_001","category":"scenes","prompt":"a tropical rainforest waterfall surrounded by orchids"}
+{"prompt_id":"scene_002","category":"scenes","prompt":"a neon-lit city street during a summer rainstorm"}
+{"prompt_id":"scene_003","category":"scenes","prompt":"ancient desert ruins beneath a sky filled with stars"}
+{"prompt_id":"style_000","category":"art_and_style","prompt":"a watercolor painting of a quiet harbor in spring"}
+{"prompt_id":"style_001","category":"art_and_style","prompt":"an ukiyo-e print of a dragon flying over ocean waves"}
+{"prompt_id":"style_002","category":"art_and_style","prompt":"an impressionist oil painting of people dancing in a garden"}
+{"prompt_id":"style_003","category":"art_and_style","prompt":"a layered paper-cut illustration of an enchanted forest"}

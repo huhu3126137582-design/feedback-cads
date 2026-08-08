@@ -1,0 +1,15 @@
+dino_model: facebook/dinov2-base
+dino_revision: f9e44c814b77203eaa57a6bdbbd535f21ede1415
+
+# This repository is a safetensors conversion of OpenAI CLIP ViT-B/32.
+# The original openai/clip-vit-base-patch32 repository only exposes a legacy
+# pickle-based .bin file, which Transformers correctly rejects under Torch 2.4.
+clip_model: sentence-transformers/clip-ViT-B-32
+clip_revision: 327ab6726d33c0e22f920c83f2ff9e4bd38ca37f
+clip_subfolder: 0_CLIPModel
+clip_weights_format: safetensors
+clipscore_weight: 2.5
+
+hps_version: v2.1
+bootstrap_replicates: 10000
+bootstrap_seed: 20260808

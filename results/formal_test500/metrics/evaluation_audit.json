@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "evaluation_fingerprint": "a920a97f3f5ec20d8de731647fa960a03eb3b11cc16e9315cb1d184e70566db7",
+  "formal_evaluation_config_sha256": "645db8fc998b0986fe818b4a3f46247518553af532859ab5594f6523e37d25a1",
+  "independently_verified_images": 16000,
+  "independently_verified_prompt_groups": 2000,
+  "feature_cache_arrays_verified": 5,
+  "maximum_per_prompt_recomputation_error": {
+    "dino_diversity": 0.0,
+    "clip_image_diversity": 0.0,
+    "clip_alignment_cosine": 0.0,
+    "clipscore": 0.0,
+    "hpsv2": 0.0
+  },
+  "bootstrap_replicates_reproduced": 10000,
+  "all_four_comparisons_reproduced": true,
+  "all_noninferiority_margins_reproduced": true,
+  "primary_acceptance_reproduced": true,
+  "primary_acceptance": {
+    "comparison": "b_feedback_vs_a_star",
+    "all_three_core_metrics_noninferior": true,
+    "point_estimate_improvements": [
+      "dino_diversity"
+    ],
+    "strong_improvements": [
+      "dino_diversity"
+    ],
+    "assessment_success": true,
+    "closed_loop_diversity_success": true,
+    "strong_research_result": true,
+    "result_label": "statistically_significant_strong_research_result"
+  },
+  "artifact_sha256": {
+    "per_image.jsonl": "5570d0d53e1ab675aef54c28746fcd14642a681455466991743f1ca44dec151f",
+    "per_prompt.jsonl": "c528715c66bea023e26461579f5ca531b9c495664e55082fc6b305756feb31ee",
+    "summary.csv": "473bca62bcb8802e041a75ee6b7f95756500ba0a6a9b433210c9939275538278",
+    "summary.json": "895dc433ccda5a9e1b90ff0b27cb8a1bdc3672fbcd7717ed87b60d2de4e2ea51",
+    "paired_bootstrap.json": "a9c8619fcae01d2f2b3d86ca677f2052a4c04e8b6cb47ee7dc51c6b433574720",
+    "evaluation_complete.json": "f5bd3b9de88fe5777ceb7d833c113e6c20f70ae13ae0739488545db1e1537179"
+  }
+}

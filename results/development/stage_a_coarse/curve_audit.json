@@ -1,0 +1,155 @@
+{
+  "curve_generation_complete": true,
+  "curve_evaluation_complete": true,
+  "development_only": true,
+  "formal_test_data_used": false,
+  "prompt_count": 50,
+  "candidates_per_prompt": 8,
+  "image_count": 2400,
+  "clipscore_noninferiority_margin": 0.0076791833996772765,
+  "hpsv2_noninferiority_margin": 0.002563040161132812,
+  "eligible_for_a_star_selection": true,
+  "search_phase": "coarse",
+  "selected_coarse_center_rho": 0.4,
+  "selected_a_star_rho": null,
+  "selection_blocker": "Fine-grid evaluation is required before A* can be frozen.",
+  "decisions": [
+    {
+      "rho": 0.2,
+      "dino_point_improved": true,
+      "dino_strong_improvement": false,
+      "clipscore_noninferior_1pct": true,
+      "hpsv2_noninferior_1pct": true,
+      "passes_available_quality_constraints": true,
+      "passes_all_quality_constraints": true,
+      "dino_mean_difference": 0.0018858565607827139,
+      "dino_ci95": [
+        -0.001105537176095133,
+        0.005228071426581494
+      ],
+      "clipscore_mean_difference": -0.0007046055793762207,
+      "clipscore_ci95": [
+        -0.0026689974665641786,
+        0.001185239583253858
+      ],
+      "hpsv2_mean_difference": -0.00052154541015625,
+      "hpsv2_ci95": [
+        -0.0012063674926757813,
+        0.0002441482543945311
+      ]
+    },
+    {
+      "rho": 0.4,
+      "dino_point_improved": true,
+      "dino_strong_improvement": false,
+      "clipscore_noninferior_1pct": true,
+      "hpsv2_noninferior_1pct": true,
+      "passes_available_quality_constraints": true,
+      "passes_all_quality_constraints": true,
+      "dino_mean_difference": 0.003173861532770273,
+      "dino_ci95": [
+        -0.0006063916461013942,
+        0.007299765949216255
+      ],
+      "clipscore_mean_difference": -0.0019288873672485352,
+      "clipscore_ci95": [
+        -0.004733117729425431,
+        0.0008970728516578673
+      ],
+      "hpsv2_mean_difference": -0.00051483154296875,
+      "hpsv2_ci95": [
+        -0.0015198059082031248,
+        0.0006036605834960935
+      ]
+    },
+    {
+      "rho": 0.6,
+      "dino_point_improved": true,
+      "dino_strong_improvement": false,
+      "clipscore_noninferior_1pct": true,
+      "hpsv2_noninferior_1pct": false,
+      "passes_available_quality_constraints": false,
+      "passes_all_quality_constraints": false,
+      "dino_mean_difference": 0.00437329735981867,
+      "dino_ci95": [
+        -0.001166197046257502,
+        0.010153981536558873
+      ],
+      "clipscore_mean_difference": -0.002832809686660767,
+      "clipscore_ci95": [
+        -0.006348101168870926,
+        0.000574090391397476
+      ],
+      "hpsv2_mean_difference": -0.00130401611328125,
+      "hpsv2_ci95": [
+        -0.0027768478393554686,
+        0.00020477294921875
+      ]
+    },
+    {
+      "rho": 0.8,
+      "dino_point_improved": true,
+      "dino_strong_improvement": true,
+      "clipscore_noninferior_1pct": false,
+      "hpsv2_noninferior_1pct": false,
+      "passes_available_quality_constraints": false,
+      "passes_all_quality_constraints": false,
+      "dino_mean_difference": 0.007847514173517398,
+      "dino_ci95": [
+        0.0017738756513474532,
+        0.013987270499912781
+      ],
+      "clipscore_mean_difference": -0.006407707929611206,
+      "clipscore_ci95": [
+        -0.010971522331237792,
+        -0.0021494000852108016
+      ],
+      "hpsv2_mean_difference": -0.00231170654296875,
+      "hpsv2_ci95": [
+        -0.004132766723632812,
+        -0.00048644256591796886
+      ]
+    },
+    {
+      "rho": 1.0,
+      "dino_point_improved": true,
+      "dino_strong_improvement": true,
+      "clipscore_noninferior_1pct": false,
+      "hpsv2_noninferior_1pct": false,
+      "passes_available_quality_constraints": false,
+      "passes_all_quality_constraints": false,
+      "dino_mean_difference": 0.024653645118948013,
+      "dino_ci95": [
+        0.014730690384821422,
+        0.03530008124278507
+      ],
+      "clipscore_mean_difference": -0.00927247405052185,
+      "clipscore_ci95": [
+        -0.016043435633182525,
+        -0.0024697782099247006
+      ],
+      "hpsv2_mean_difference": -0.0054229736328125,
+      "hpsv2_ci95": [
+        -0.00854560089111328,
+        -0.002365974426269532
+      ]
+    }
+  ],
+  "interpretation": {
+    "highest_dino_point_rho": 1.0,
+    "rho_with_both_available_quality_constraints": [
+      0.2,
+      0.4
+    ],
+    "rho_with_strong_dino_improvement": [
+      0.8,
+      1.0
+    ],
+    "rho_passing_all_quality_constraints": [
+      0.2,
+      0.4
+    ],
+    "selected_a_star_has_higher_dino_than_vanilla": null,
+    "claim": "A* is selected from nonzero settings with a positive DINO diversity point difference that pass the preregistered 1% CLIPScore and HPSv2 non-inferiority checks."
+  }
+}

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+outputs/
+models/
+data/coco/download/
+data/coco/annotations/
+*.zip
+.env
+.venv/
+venv/
+dist/
+build/
+*.egg-info/

@@ -1,0 +1,27 @@
+{
+  "source": "MS-COCO 2017 validation captions",
+  "source_path": "/root/autodl-tmp/fdan/data/coco/annotations/captions_val2017.json",
+  "source_sha256": "afe3b30e403dd7f228e2373023abbd60042a6e10ec6874d3652df034d289ebb9",
+  "selection": {
+    "one_caption_per_image": true,
+    "caption_choice": "minimum annotation ID among eligible captions",
+    "content_token_interval_inclusive": [
+      5,
+      20
+    ],
+    "tokenizer_path": "/root/autodl-tmp/fdan/models/huggingface/hub/models--stable-diffusion-v1-5--stable-diffusion-v1-5/snapshots/451f4fe16113bff5a5d2269ed5ad43b0592e9a14/tokenizer",
+    "tokenizer_model_max_length": 77,
+    "shuffle_input": "ascending eligible image IDs",
+    "shuffle_algorithm": "Python random.Random(seed).shuffle",
+    "shuffle_seed": 20260808,
+    "dev_count_requested": 50,
+    "test_count_requested": 500
+  },
+  "eligible_annotation_count": 24762,
+  "eligible_image_count": 5000,
+  "dev_count": 50,
+  "test_count": 500,
+  "dev_sha256": "940030cc9f07a787f2041ea8144f831ad65a33cd2a55ee116f74ca4710b35754",
+  "test_sha256": "ed2251c29003aea93bf2c623861d16187bbddb093382d3d029aa5787e5f361d5",
+  "image_ids_disjoint": true
+}

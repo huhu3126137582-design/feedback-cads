@@ -1,0 +1,52 @@
+method:
+  id: original_cads_sd15_adaptation_v1
+  claim: paper-algorithm-faithful CADS adapted to SD v1.5
+  numerical_reproduction_of_paper_sd_results: false
+
+paper_source:
+  paper: CADS, ICLR 2024
+  algorithm: Algorithm 1 and Figure 15
+  hyperparameters: Appendix G, Table 13, Stable Diffusion row
+  model: stable-diffusion-v2-1
+  sampler: DDPM
+  num_inference_steps: 100
+  guidance_scale: 9.0
+
+project_target:
+  model: stable-diffusion-v1-5
+  revision: 451f4fe16113bff5a5d2269ed5ad43b0592e9a14
+  scheduler: DDIM
+  num_inference_steps: 50
+  eta: 0.0
+  guidance_scale: 7.5
+  resolution: 512
+  dtype: float16
+
+cads:
+  schedule_coordinate: scheduler_timestep_over_num_train_timesteps_minus_one
+  tau1: 0.60
+  tau2: 0.90
+  noise_scale: 0.25
+  rescale: true
+  rescale_mix_psi: 1.0
+  perturb_positive_full_embedding: true
+  perturb_unconditional_full_embedding: true
+  independent_positive_negative_noise: true
+
+implementation_conventions:
+  statistics: scalar_mean_and_population_std_per_sample
+  statistics_dimensions: token_and_channel
+  cross_batch_statistics: false
+  intermediate_dtype: float32
+  denominator_floor_epsilon: 1.0e-6
+  zero_pollution_fast_path: bitwise_identity
+  note: >-
+    The paper does not fully specify SD text-tensor reduction dimensions,
+    padding handling, or numerical epsilon. These are disclosed SD v1.5
+    engineering conventions, not claims about an official author codebase.
+
+reproducibility:
+  latent_seed_stream: independent
+  positive_condition_seed_stream: independent_per_candidate
+  negative_condition_seed_stream: independent_per_candidate
+  negative_seed_derivation: positive_seed_plus_10000019_mod_2pow63_minus_1

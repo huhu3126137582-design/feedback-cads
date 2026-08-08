@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "reporting_config_sha256": "1f007843415d5f1ae315ad9f75e4e93acbe20a918381d899fd5a2cbbb85af14b",
+  "reporting_fingerprint": "6508daf77afd5391b7152ee3141433c468d2d346ba315315117e534b69bed625",
+  "main_table_rows_verified": 4,
+  "balanced_low_score_slots_verified": 40,
+  "source_images_per_slot_verified": 8,
+  "contact_sheets_verified": 8,
+  "result_figures_verified": 2,
+  "manual_annotation_rows_blank": 40,
+  "formal_acceptance_unchanged": true,
+  "required_claim_caveats_present": true
+}

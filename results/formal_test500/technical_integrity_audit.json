@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "audit_scope": "generation_integrity_only_no_research_metrics",
+  "formal_protocol_sha256": "9d19e02e284aefe0ed58fdc5a47dd0a0fec0966936a40dd9e281d2c97d0161ef",
+  "run_spec_sha256": "06a18388d9f6db01dcd3c8c16ec160c66fae1ced785718429d127700ba57ad51",
+  "manifest_sha256": "e89e4975c1d7336cd385c1560170db65b67db8ec122a61d50f5be6e642c77604",
+  "manifest_rows": 16000,
+  "method_image_counts": {
+    "vanilla": 4000,
+    "original_cads": 4000,
+    "a_star": 4000,
+    "b_feedback": 4000
+  },
+  "verified_png_count": 16000,
+  "verified_png_resolution": [
+    512,
+    512
+  ],
+  "total_png_bytes": 7206997684,
+  "prompt_candidate_pair_groups": 4000,
+  "diagnostic_counts": {
+    "vanilla": 500,
+    "original_cads": 500,
+    "a_star": 500,
+    "b_feedback": 500
+  },
+  "b_feedback_history_rows": 25000,
+  "all_prompt_candidate_latents_paired": true,
+  "all_cads_positive_condition_seeds_paired": true,
+  "vanilla_condition_seeds_are_null": true,
+  "all_diagnostics_pass_runtime_audits": true,
+  "quality_metrics_computed": false,
+  "formal_metric_files_seen": false
+}

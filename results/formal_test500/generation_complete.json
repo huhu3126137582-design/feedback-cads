@@ -1,0 +1,25 @@
+{
+  "runner_schema": "feedback-cads-four-method-generation-v1",
+  "run_spec_sha256": "06a18388d9f6db01dcd3c8c16ec160c66fae1ced785718429d127700ba57ad51",
+  "formal_protocol_sha256": "9d19e02e284aefe0ed58fdc5a47dd0a0fec0966936a40dd9e281d2c97d0161ef",
+  "mode": "formal",
+  "formal_test_data_used": true,
+  "quality_metrics_computed": false,
+  "method_order": [
+    "vanilla",
+    "original_cads",
+    "a_star",
+    "b_feedback"
+  ],
+  "prompt_count": 500,
+  "candidates_per_prompt": 8,
+  "image_count": 16000,
+  "images_per_method": 4000,
+  "manifest_sha256": "e89e4975c1d7336cd385c1560170db65b67db8ec122a61d50f5be6e642c77604",
+  "all_methods_share_prompt_candidate_latents": true,
+  "all_cads_methods_share_positive_condition_seeds": true,
+  "vanilla_consumed_no_condition_seed": true,
+  "all_global_torch_rng_checks_passed": true,
+  "all_runs_used_exactly_50_unet_calls": true,
+  "formal_output_created": true
+}

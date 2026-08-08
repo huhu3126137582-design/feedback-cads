@@ -1,0 +1,64 @@
+method:
+  name: feedback-cads-b-frozen
+  stage: B
+  feedback_enabled: true
+  formal_test_data_used: false
+  final_selected_configuration: true
+
+model:
+  name: stable-diffusion-v1-5
+  resolution: 512
+  dtype: float16
+
+sampling:
+  scheduler: DDIM
+  num_inference_steps: 50
+  eta: 0.0
+  cfg_scale: 7.5
+  candidates_per_prompt: 8
+
+cads:
+  schedule_coordinate: loop_progress
+  hold_until_progress: 0.10
+  hard_off_progress: 0.60
+  noise_scale: 0.20
+  rescale: true
+  rescale_mix: 0.70
+  content_tokens_only: true
+  clean_unconditional: true
+  statistics: per_sample_content_tokens_fp32
+
+feedback:
+  initial_rho: 0.55
+  k_diversity: 0.08
+  epsilon: 1.0e-6
+  reference_margin_alpha: 0.15
+  group_size: 8
+  pool_size: 8
+  dz_control_start_progress: 0.20
+  update_delay_steps: 1
+  hard_off_stops_updates: true
+
+reference:
+  path: outputs/a_star_reference_coco_dev50/reference_curves.json
+  sha256: c2ae2024f06c699eb9e51e063ab9aea2f118c03663d6918965c1e639f9667382
+  source_split: COCO-Dev-50
+  source_rho_a_star: 0.55
+  formal_test_data_used: false
+
+selection:
+  path: outputs/b_feedback_margin_selection_extended_coco_dev50/ALPHA_SELECTION_EXTENDED.json
+  sha256: 619c1dd3582b0bc6b8b823e622e61724f754d33d6883943550164acc9ca73e45
+  selected_alpha: 0.15
+  adaptive_extension_after_stage1_results: true
+  absolute_stop_alpha: 0.20
+  no_further_alpha_extension_allowed: true
+  development_point_improvement_observed: true
+  statistically_significant_development_improvement: false
+
+randomness:
+  latent_seed_stream: caller_owned
+  condition_seed_stream: independent_per_candidate
+  consume_one_condition_draw_per_active_step: true
+  condition_stream_uses_global_rng: false
+  negative_condition_seed_stream: none

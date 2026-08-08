@@ -1,0 +1,13 @@
+{
+  "evaluation_fingerprint": "a920a97f3f5ec20d8de731647fa960a03eb3b11cc16e9315cb1d184e70566db7",
+  "formal_evaluation_config_sha256": "645db8fc998b0986fe818b4a3f46247518553af532859ab5594f6523e37d25a1",
+  "formal_protocol_sha256": "9d19e02e284aefe0ed58fdc5a47dd0a0fec0966936a40dd9e281d2c97d0161ef",
+  "manifest_sha256": "e89e4975c1d7336cd385c1560170db65b67db8ec122a61d50f5be6e642c77604",
+  "metric_protocol_sha256": "5aeff71b050df0f8e95f4532fff854d3b13be5cb212fc8379c8c836e95a73188",
+  "image_count": 16000,
+  "prompt_group_count": 2000,
+  "method_count": 4,
+  "all_metric_stages_complete_before_reporting": true,
+  "formal_metric_values_reported": true,
+  "primary_result_label": "statistically_significant_strong_research_result"
+}
