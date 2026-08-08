@@ -45,8 +45,52 @@ where `e_D` is the diversity deficit relative to frozen A* reference curves.
 The update has a one-step delay; condition noise is active only for DDIM steps
 0–29 and is exactly zero for steps 30–49.
 
-The full motivation, derivation, protocol and results are documented in
-[`方案.md`](方案.md).
+The frozen protocol, stage-by-stage commands, confirmation gates, and expected
+artifacts are documented in [`REPRODUCE.md`](REPRODUCE.md).
+
+## Visual overview
+
+### Fig. 1 | Feedback-CADS method
+
+[![Training-free Feedback-CADS method diagram](results/publication/project_figures/fig1_feedback_cads_method.png)](results/publication/project_figures/fig1_feedback_cads_method.pdf)
+
+The matched A* baseline uses fixed condition annealing with `rho = 0.55`.
+Feedback-CADS instead measures candidate diversity from the existing SD v1.5
+forward pass, compares it with frozen A* reference curves, and applies a
+one-step-delayed proportional update to the next condition-noise strength.
+Both methods retain DDIM-50 and exactly 50 UNet calls per prompt.
+
+### Fig. 2 | Same-prompt, same-seed comparison
+
+[![Same-prompt and same-seed qualitative comparison](results/publication/project_figures/fig2_qualitative_same_seed.png)](results/publication/project_figures/fig2_qualitative_same_seed.pdf)
+
+Rows compare the four methods and columns share the same initial latent seed.
+This automatically selected, quality-eligible example illustrates the
+within-prompt variation produced by each method. It is a qualitative example;
+the formal conclusion is based on all 500 held-out prompts rather than this
+single image plate.
+
+### Fig. 3 | Closed-loop controller dynamics
+
+[![Feedback-CADS controller dynamics](results/publication/project_figures/fig3_controller_dynamics.png)](results/publication/project_figures/fig3_controller_dynamics.pdf)
+
+Across COCO-Test-500, the controller adapts `rho` by prompt while tracking the
+frozen guidance- and latent-diversity reference curves. Condition pollution is
+hard-disabled after step 29. The plotted numerical values are available as
+[`fig3_controller_dynamics_source_data.csv`](results/publication/project_figures/fig3_controller_dynamics_source_data.csv).
+
+### Fig. 4 | Parameter selection and ablation
+
+[![Development-set parameter selection and ablation](results/publication/project_figures/fig4_dev_ablation.png)](results/publication/project_figures/fig4_dev_ablation.pdf)
+
+COCO-Dev-50 selects `rho* = 0.55` for A* and reference margin `alpha* = 0.15`
+for B*. Crosses identify settings that fail at least one preregistered quality
+non-inferiority constraint. These development-set panels document parameter
+selection and are not formal test-set evidence. Source data are provided in
+[`fig4_ablation_source_data.csv`](results/publication/project_figures/fig4_ablation_source_data.csv).
+
+Complete publication legends and figure QA notes are available under
+[`results/publication/project_figures/`](results/publication/project_figures/).
 
 ## Repository layout
 
@@ -165,10 +209,3 @@ identity. Readers transparently rebase missing `outputs/`, `data/`, `configs/`,
 Stage-by-stage commands and confirmation gates are listed in
 [`REPRODUCE.md`](REPRODUCE.md). Full generation requires approximately 7 GB for
 formal PNG outputs in addition to model caches and development runs.
-
-## Failure-case scope
-
-Balanced low-CLIPScore and low-HPSv2 candidates were selected automatically,
-but they were not manually labelled as semantic or visual failures. They are
-not used in parameter selection, statistical acceptance, or the formal method
-claim. No human-confirmed failure-case conclusion is made in this repository.
